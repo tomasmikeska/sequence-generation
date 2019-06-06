@@ -6,6 +6,14 @@ from constants import TEXT_CORPUS_PATH, TIMESTEPS, FINAL_MODEL_PATH, SAMPLE_ITER
 
 
 def sample(model, seeding_text, iterations):
+    '''Sample from given model specified number of chars.
+
+    Args:
+        model (Keras model): Trained model
+        seeding_text (string): Text the network will use as a starting text
+        iterations (int): Number of chars generated
+    '''
+
     X, y, n_vocab, chars = get_javascript_dataset()
     char_to_int = {char: index for index, char in enumerate(chars)}
     int_to_char = {index: char for index, char in enumerate(chars)}
@@ -24,6 +32,10 @@ def sample(model, seeding_text, iterations):
 
 
 if __name__ == '__main__':
+    '''Sample from trained model using random sequence from
+    training corpus as a seeding text
+    '''
+
     model = load_model(FINAL_MODEL_PATH)
 
     with open(TEXT_CORPUS_PATH) as f:

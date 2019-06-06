@@ -18,9 +18,11 @@ def train(model, X, y):
 
 
 if __name__ == '__main__':
+    # Train model
     X, y, n_vocab, chars = get_javascript_dataset()
     model = load_model(BATCH_SIZE, len(chars), TIMESTEPS, training=True)
     train(model, X, y)
+    # Convert model to production model (with stateless LSTMs for easy sampling)
     prod_model = load_model(BATCH_SIZE, len(chars), TIMESTEPS, training=False)
     prod_model.set_weights(model.get_weights())
     prod_model.save(FINAL_MODEL_PATH)
