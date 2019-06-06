@@ -7,8 +7,8 @@ from constants import TEXT_CORPUS_PATH, TIMESTEPS, FINAL_MODEL_PATH, SAMPLE_ITER
 
 def sample(model, seeding_text, iterations):
     X, y, n_vocab, chars = get_javascript_dataset()
-    char_to_int = { char: index for index, char in enumerate(chars) }
-    int_to_char = { index: char for index, char in enumerate(chars) }
+    char_to_int = {char: index for index, char in enumerate(chars)}
+    int_to_char = {index: char for index, char in enumerate(chars)}
 
     result = ''
     pattern = [char_to_int[char] for char in seeding_text]
@@ -28,8 +28,8 @@ if __name__ == '__main__':
 
     with open(TEXT_CORPUS_PATH) as f:
         corpus = f.read()
-        random_start = randint(TIMESTEPS, len(corpus)-TIMESTEPS)
-        seeding_text = corpus[random_start:random_start+TIMESTEPS]
+        random_start = randint(TIMESTEPS, len(corpus) - TIMESTEPS)
+        seeding_text = corpus[random_start:random_start + TIMESTEPS]
 
     result = sample(model, seeding_text, SAMPLE_ITERS)
 

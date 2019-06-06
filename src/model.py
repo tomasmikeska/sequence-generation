@@ -8,10 +8,13 @@ DROPOUT     = 0.25
 
 
 def load_model(batch_size, n_chars, sequence_len, training=False):
+    # Specify batch_input_shape during training because of stateful LSTM units
+    batch_input_shape = (batch_size, sequence_len) if training else None
+
     model = Sequential()
     model.add(Embedding(n_chars, HIDDEN_SIZE,
                         input_length=sequence_len,
-                        batch_input_shape=(batch_size, sequence_len) if training else None))
+                        batch_input_shape=batch_input_shape))
     model.add(CuDNNLSTM(HIDDEN_SIZE, return_sequences=True, stateful=training))
     model.add(Dropout(DROPOUT))
     model.add(CuDNNLSTM(HIDDEN_SIZE, return_sequences=True, stateful=training))

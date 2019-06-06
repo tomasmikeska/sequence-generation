@@ -23,7 +23,7 @@ def get_sequences(text, n_chars, char_to_int, seq_length):
 
 def convert_dataset(raw_text):
     chars = sorted(list(set(raw_text)))
-    char_to_int = { char: index for index, char in enumerate(chars) }
+    char_to_int = {char: index for index, char in enumerate(chars)}
 
     n_chars = len(raw_text)
     n_vocab = len(chars)
@@ -36,5 +36,5 @@ def convert_dataset(raw_text):
 
 def get_javascript_dataset():
     raw_text = read_file(TEXT_CORPUS_PATH)
-    raw_text = re.sub('    ', '\t', raw_text).strip() # convert 4 spaces to tab
+    raw_text = re.sub('    ', '\t', raw_text).strip()  # convert 4 spaces to tab
     return convert_dataset(raw_text)
